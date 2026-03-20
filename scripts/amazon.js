@@ -81,7 +81,6 @@ document.querySelectorAll('.js-add-to-cart')
           quantity: 1
         });
       }
-      console.log(matchingItem);
       console.log(cart)
     });
   });
