@@ -656,5 +656,35 @@ const products = [
       "apparel",
       "mens"
     ]
+  },
+    {
+    id: "a3f8e2c1-4b7d-49e6-8a2c-5f9d3e7b1a84",
+    image: "images/products/backpack.jpg",
+    name: "Backpack",
+    rating: {
+      stars: 3.5,
+      count: 217
+    },
+    priceCents: 1920,
+    keywords: [
+      "bag",
+      "backpack",
+      "shoulder bag"
+    ]
+  }, 
+  {
+    id: "f7e9a4c2-8d3b-4f1e-9a6c-2b7d5e8f3c91",
+    image: "images/products/umbrella.jpg",
+    name: "Umbrella",
+    rating: {
+      stars: 4,
+      count: 129
+    },
+    priceCents: 1521,
+    keywords: [
+      "payong",
+      "umbrella",
+      "rain cover"
+    ]
   }
 ];
