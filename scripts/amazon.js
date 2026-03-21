@@ -58,7 +58,7 @@ products.forEach((product) => {
 
 document.querySelector('.js-products').innerHTML = productsHtml;
 
-const cartAdded =  document.querySelector('.js-added-to-cart');
+let timeoutId = null;
 
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
@@ -93,8 +93,18 @@ document.querySelectorAll('.js-add-to-cart')
       document.querySelector('.js-cart-quantity')
         .innerHTML = `
           <p>${cartQuantity}</p>
-        `
+        `;
 
-      console.log(cart);
+      const message = button.closest('.product-container').querySelector('.js-added-to-cart');
+
+      message.classList.add('opacity');
+      
+      if (timeoutId !== null) {
+        clearTimeout(timeoutId);
+      };
+      
+      timeoutId = setTimeout(() => {
+          message.classList.remove('opacity');
+      }, 2000);
     });
   });
