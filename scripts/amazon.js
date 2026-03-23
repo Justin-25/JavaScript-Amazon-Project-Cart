@@ -1,3 +1,6 @@
+import { cart, addToCart } from '../data/cart.js';
+import { products } from '../data/products.js';
+
 let productsHtml = '';
 
 products.forEach((product) => {
@@ -60,43 +63,29 @@ document.querySelector('.js-products').innerHTML = productsHtml;
 
 let timeoutId = null;
 
+
+function updateCartQty() {
+  let cartQuantity = 0;
+
+  cart.forEach((item) => {
+      cartQuantity += item.quantity; 
+  });
+
+  document.querySelector('.js-cart-quantity')
+  .innerHTML = `
+      <p>${cartQuantity}</p>
+  `;
+}
+
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
     button.addEventListener('click', () => {
       const { productId } = button.dataset;
 
-      let selectedQuantity = document.querySelector(`.js-quantity-selector-${productId}`).value;
-
-      let matchingItem;
-
-      cart.forEach((item) => {
-        if (productId === item.productId) {
-          matchingItem = item;
-        }
-      });
-
-      if (matchingItem){
-        matchingItem.quantity += Number(selectedQuantity);
-      } else {
-        cart.push({
-          productId,
-          quantity: Number(selectedQuantity)
-        });
-      }
-
-      let cartQuantity = 0;
-
-      cart.forEach((item) => {
-         cartQuantity += item.quantity; 
-      });
-
-      document.querySelector('.js-cart-quantity')
-        .innerHTML = `
-          <p>${cartQuantity}</p>
-        `;
+      addToCart(productId);
+      updateCartQty();
 
       const message = button.closest('.product-container').querySelector('.js-added-to-cart');
-
       message.classList.add('opacity');
       
       if (timeoutId !== null) {
