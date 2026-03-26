@@ -31,7 +31,7 @@ export function addToCart(productId) {
     }
   });
 
-  if (matchingItem){
+  if (matchingItem) {
     matchingItem.quantity += Number(selectedQuantity);
   } else {
     cart.push({
@@ -56,3 +56,29 @@ export function removeFromCart(productId) {
 
   saveToCart();
 }
+
+export function updateQuantity(productId, newQuantity) {
+  let matchingQuantity;
+
+  cart.forEach((cartItem) => {
+    if (productId === cartItem.productId) {
+      matchingQuantity = cartItem;
+    }
+  });
+
+  const newCart = [];
+
+  if (newQuantity <= 0) {
+    cart.forEach((cartItem) => {
+      if (cartItem.productId !== productId) {
+        newCart.push(cartItem);
+      }
+    });
+
+    cart = newCart;
+  } else if (matchingQuantity) {
+    matchingQuantity.quantity = Number(newQuantity);
+  } 
+
+  saveToCart();
+};
