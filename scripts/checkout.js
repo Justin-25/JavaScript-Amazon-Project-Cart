@@ -3,6 +3,12 @@ import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 import { calculateCartQty } from "./utils/updateQty.js";
 
+const today =  dayjs();
+const deliveryDate = today.add(7, 'days');
+const todayDate = deliveryDate.format('dddd, MMMM D')
+
+console.log(todayDate);
+
 let cartSummaryHtml = '';
 
 cart.forEach((cartItem) => {
