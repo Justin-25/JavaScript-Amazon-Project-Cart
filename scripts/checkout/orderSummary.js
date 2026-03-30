@@ -1,9 +1,9 @@
 import { cart, removeFromCart, updateDeliveryOption, updateQuantity } from "../../data/cart.js";
-import { products, getProduct } from "../../data/products.js";
+import { getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import { calculateCartQty } from "../utils/updateQty.js";
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
-import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
+import { calculateDeliveryDate, deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
 
 
@@ -20,15 +20,7 @@ export function renderOrderSummary () {
     const deliveryOptionId = cartItem.deliveryOptionId;
 
     const deliveryOption = getDeliveryOption(deliveryOptionId);
-
-    const todaysDate = dayjs();
-    const deliveryDate = todaysDate.add(
-      deliveryOption.deliveryDays,
-      'days'
-    );
-    const deliveryDateFormat = deliveryDate.format(
-      'dddd, MMMM D'
-    );
+    const deliveryDateFormat = calculateDeliveryDate(deliveryOption);
 
       cartSummaryHtml += `
         <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
@@ -80,14 +72,7 @@ export function renderOrderSummary () {
     let deliveryHtml = '';
 
     deliveryOptions.forEach((deliveryOption) => {
-      const todaysDate = dayjs();
-      const deliveryDate = todaysDate.add(
-        deliveryOption.deliveryDays,
-        'days'
-      );
-
-      const deliveryDateFormat = deliveryDate.format('dddd, MMMM D');
-
+      const deliveryDateFormat = calculateDeliveryDate(deliveryOption);
       const price = deliveryOption.priceCents
         === 0 ? 'FREE' : `$${formatCurrency(deliveryOption.priceCents)} -`;
 
@@ -124,10 +109,8 @@ export function renderOrderSummary () {
         link.addEventListener('click', () => {
             const productId = link.dataset.productId;
             removeFromCart(productId);
-
-            const container = document.querySelector(`.js-cart-item-container-${productId}`);
-            container.remove();
-            renderPaymentSummary()
+            renderOrderSummary();
+            renderPaymentSummary();
         });
     });
 

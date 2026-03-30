@@ -1,4 +1,5 @@
 import { cart } from "../../data/cart.js";
+import { renderCheckoutHeader } from "../checkout/checkoutHeader.js";
 
 export function updateCartQty() {
   let cartQuantity = 0;
@@ -26,8 +27,5 @@ export function calculateCartQty() {
       cartQuantity += item.quantity; 
   });
 
-  document.querySelector('.js-quantity-items')
-    .innerHTML = `
-      ${cartQuantity} items
-    `;
+  renderCheckoutHeader(cartQuantity);
 }
