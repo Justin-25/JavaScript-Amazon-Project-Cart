@@ -2,7 +2,6 @@ import { cart, removeFromCart, updateDeliveryOption, updateQuantity } from "../.
 import { getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import { calculateCartQty } from "../utils/updateQty.js";
-import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { calculateDeliveryDate, deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
 
@@ -144,9 +143,8 @@ export function renderOrderSummary () {
         }
 
         updateQuantity(productId, newQuantity);
-          container.querySelector('.js-quantity-label').textContent = newQuantity;
-
-        calculateCartQty();
+        renderOrderSummary();
+        renderPaymentSummary();
       })
     });
 
