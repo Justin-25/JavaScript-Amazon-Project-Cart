@@ -1,17 +1,17 @@
 import { deliveryOptions } from "./deliveryOptions.js";
 
 class Cart {
-  cartItems;
-  localStorageKey;
+  cartItems; // Public property
+  #localStorageKey; // Private property
 
   constructor (localStorageKey) {
-    this.localStorageKey = localStorageKey;
-    this.loadFromStorage(); 
+    this.#localStorageKey = localStorageKey;
+    this.#loadFromStorage(); 
   };
 
       // Shorthand Method Syntax - Shortcut for loadFromStorage: function () {}
-  loadFromStorage () {
-    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
+  #loadFromStorage () {
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
 
     if (!this.cartItems) {
       this.cartItems = [
@@ -35,7 +35,7 @@ class Cart {
   };
 
   saveToCart () {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
   };
 
   addToCart (productId) {
