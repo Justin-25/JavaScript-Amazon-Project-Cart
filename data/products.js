@@ -81,6 +81,37 @@ class Clothing extends Product{
   }
 }
 
+/*
+const date = new Date();
+console.log(date);
+console.log(date.toLocaleString())
+console.log(date.getDay(), date.getTime())
+*/
+
+/*
+const object2 = {
+  a: 2,
+  b: this.a
+}
+*/
+
+/*
+function logThis() {
+  console.log(this);
+}
+logThis('Hi');
+logThis.call('Hello');
+*/
+
+/*
+this // undefined
+const object3 = {
+  method: () => {
+    console.log(this - undfined ); // "this" will have the same value as outside the arrow function
+  }
+}
+*/
+
 // inheritance - Practice code
 const tshirt = new Clothing({
   id: "83d4ca15-0f35-48f5-b7a3-1ea210004f2e",
@@ -99,8 +130,6 @@ const tshirt = new Clothing({
   type: "clothing",
   sizeChartLink: "images/clothing-size-chart.png"
 });
-
-console.log(tshirt)
 
 export const products = [
   {
