@@ -69,6 +69,12 @@ const raceCar = new RaceCar({
   acceleration: 180
 })
 
+const car = new Car({
+  brand: 'Ferrari',
+  model: 'F40',
+});
+car.go();
+car.displayInfo()
 raceCar.displayInfo()
 
 /*
