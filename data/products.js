@@ -14,7 +14,7 @@ export function getProduct (productId) {
 
 
 // Converting an object into a class
-class Product {
+export class Product {
   id;
   image;
   name;
@@ -62,7 +62,7 @@ const product1 = new Product({
 });
 
 // inheritance
-class Clothing extends Product{
+export class Clothing extends Product{
   sizeChartLink
 
   constructor(productDetails) {
@@ -81,7 +81,7 @@ class Clothing extends Product{
   }
 }
 
-class Appliances extends Product{
+export class Appliances extends Product{
   instructionsLink;
   warrantyLink;
 
