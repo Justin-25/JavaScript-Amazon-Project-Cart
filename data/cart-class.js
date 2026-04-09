@@ -134,7 +134,3 @@ class Cart {
 };
 
 export const cart = new Cart('cart');
-
-console.log(cart)
-console.log(businessCart)
-console.log(businessCart instanceof Cart)
