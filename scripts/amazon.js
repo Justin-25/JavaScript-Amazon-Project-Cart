@@ -1,4 +1,4 @@
-import { addToCart } from '../data/cart.js';
+import { cart } from '../data/cart-class.js';
 import { products } from '../data/products.js';
 import { updateCartQty } from './utils/updateQty.js';
 
@@ -71,7 +71,7 @@ document.querySelectorAll('.js-add-to-cart')
     button.addEventListener('click', () => {
       const { productId } = button.dataset;
 
-      addToCart(productId);
+      cart.addToCart(productId);
       updateCartQty();
 
       const message = button.closest('.product-container').querySelector('.js-added-to-cart');

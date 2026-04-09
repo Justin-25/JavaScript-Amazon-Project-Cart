@@ -1,4 +1,4 @@
-import { cart, removeFromCart, updateDeliveryOption, updateQuantity } from "../../data/cart.js";
+import { cart } from "../../data/cart-class.js";
 import { getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import { calculateCartQty } from "../utils/updateQty.js";
@@ -10,7 +10,7 @@ export function renderOrderSummary () {
     
   let cartSummaryHtml = '';
 
-  cart.forEach((cartItem) => {
+  cart.cartItems.forEach((cartItem) => {
 
     const productId = cartItem.productId;
 
@@ -117,7 +117,7 @@ export function renderOrderSummary () {
     .forEach((link) => {
         link.addEventListener('click', () => {
             const productId = link.dataset.productId;
-            removeFromCart(productId);
+            cart.removeFromCart(productId);
             renderOrderSummary();
             renderPaymentSummary();
         });
@@ -149,10 +149,9 @@ export function renderOrderSummary () {
         } else if (isNaN(newQuantity)) {
           return container.querySelector('.js-error-message').innerHTML = 'Kindly try again...';
         } else if (newQuantity >= 0 && newQuantity < 1000) {
-          updateQuantity(productId, newQuantity);
+          cart.updateQuantity(productId, newQuantity);
         }
-
-        updateQuantity(productId, newQuantity);
+        
         renderOrderSummary();
         renderPaymentSummary();
       })
@@ -176,7 +175,7 @@ export function renderOrderSummary () {
           productId,
           deliveryOptionId
         } = element.dataset;
-        updateDeliveryOption(productId, deliveryOptionId)
+        cart.updateDeliveryOption(productId, deliveryOptionId)
         renderOrderSummary();
         renderPaymentSummary();
       });

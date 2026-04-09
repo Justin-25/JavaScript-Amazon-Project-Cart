@@ -6,11 +6,11 @@ class Cart {
 
   constructor (localStorageKey) {
     this.#localStorageKey = localStorageKey;
-    this.loadFromStorage(); 
+    this.#loadFromStorage(); 
   };
 
       // Shorthand Method Syntax - Shortcut for loadFromStorage: function () {}
-  loadFromStorage () {
+  #loadFromStorage () {
     this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
 
     if (!this.cartItems) {
@@ -133,7 +133,8 @@ class Cart {
   }
 };
 
-export const cart = new Cart('cart');
+const cart = new Cart('cart-oop');
+const businessCart = new Cart('cart-business');
 
 console.log(cart)
 console.log(businessCart)

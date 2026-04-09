@@ -1,10 +1,10 @@
-import { cart } from "../../data/cart.js";
+import { cart } from "../../data/cart-class.js";
 import { renderCheckoutHeader } from "../checkout/checkoutHeader.js";
 
 export function updateCartQty() {
   let cartQuantity = 0;
 
-  cart.forEach((item) => {
+  cart.cartItems.forEach((item) => {
       cartQuantity += item.quantity; 
   });
 
@@ -23,7 +23,7 @@ export function updateCartQty() {
 export function calculateCartQty() {
   let cartQuantity = 0;
 
-  cart.forEach((item) => {
+  cart.cartItems.forEach((item) => {
       cartQuantity += item.quantity; 
   });
 
