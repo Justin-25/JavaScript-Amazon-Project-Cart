@@ -1,6 +1,6 @@
 import { formatCurrency } from "../scripts/utils/money.js";
 
-export function getProduct (productId) {
+export function getProduct(productId) {
   let matchingProduct;
 
   products.forEach((product) => {
@@ -889,5 +889,3 @@ export function loadProducts(func) {
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
 }
-
-loadProducts();
