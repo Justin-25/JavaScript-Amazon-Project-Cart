@@ -1,8 +1,7 @@
 import { cart } from "../../data/cart-class.js";
 import { renderOrderSummary } from "../../scripts/checkout/orderSummary.js";
-import { getProduct } from "../../data/products.js";
+import { getProduct, loadProducts, loadProductsFetch } from "../../data/products.js";
 import { formatCurrency } from "../../scripts/utils/money.js";
-import { loadProducts } from "../../data/products.js";
 
 describe('Test suite: renderorderSummary', () => {
 
@@ -16,7 +15,7 @@ describe('Test suite: renderorderSummary', () => {
   let productPrice2;
 
   beforeAll((done) => {
-    loadProducts(() => {
+    loadProductsFetch().then(() => {
       product1 = getProduct(productId1);
       product2 = getProduct(productId2);
 

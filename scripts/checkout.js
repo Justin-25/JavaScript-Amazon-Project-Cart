@@ -1,7 +1,7 @@
 import { renderOrderSummary } from "./checkout/orderSummary.js";
 import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 import { renderCheckoutHeader } from "./checkout/checkoutHeader.js";
-import { loadProducts } from "../data/products.js";
+import { loadProducts, loadProductsFetch } from "../data/products.js";
 import { cart } from "../data/cart-class.js";
 // import '../data/cart-class.js';
 // import '../data/car.js';
@@ -11,15 +11,21 @@ import { cart } from "../data/cart-class.js";
 // - lets us run multiple promises at the same time
 // - and wait for all of them to finish
 Promise.all([
-  new Promise((resolve) => {
-    console.log('start promise');
-    // Asynchronous function
-    loadProducts(() => {
-      console.log('finished loading products')
-      // first feature is we can give resoleve() a value
-      resolve('value1');
-    });
-  }),
+
+  loadProductsFetch(),
+
+  /*
+    new Promise((resolve) => {
+      console.log('start promise');
+      // Asynchronous function
+      loadProducts(() => {
+        console.log('finished loading products')
+        // first feature is we can give resoleve() a value
+        resolve('value1');
+      });
+    }),
+  */
+ 
   new Promise((resolve) => {
     cart.loadCart(() => {
       console.log('finished loading cart')

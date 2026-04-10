@@ -866,6 +866,33 @@ export const products = [
 // Backend for Products
 export let products = [];
 
+export function loadProductsFetch() {
+
+  const promiseFetch = fetch('https://supersimplebackend.dev/products').then((response) => {
+    // response.json() is asynchronous, it returns a promise
+    return response.json();
+    // when response.json() finishes, it's gonna give us the data that's attached to the response and it's gonna save it inside this parameter "productsData"
+  }).then((productsData) => {
+    products = productsData.map((productDetails) => {
+      if (productDetails.type === 'clothing') {
+        return new Clothing(productDetails);
+      } else if (productDetails.type === 'appliances') {
+        return new Appliances(productDetails);
+      }
+      return new Product(productDetails);
+    });
+
+    console.log('load products');
+  });
+
+  return promiseFetch;
+};
+
+// loadProductsFetch().then(() => {
+//   console.log('next-step')
+// })
+
+
 // Callback - func to loadProducts in amazon.js 
 export function loadProducts(func) {
   const xhr = new XMLHttpRequest();
