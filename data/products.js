@@ -132,7 +132,6 @@ const object3 = {
     console.log(this - undfined ); // "this" will have the same value as outside the arrow function
   }
 }
-*/
 
 // inheritance - Practice code
 const tshirt = new Clothing({
@@ -862,3 +861,33 @@ export const products = [
   }
   return new Product(productDetails);
 });
+*/
+
+// Backend for Products
+export let products = [];
+
+// Callback - func to loadProducts in amazon.js 
+export function loadProducts(func) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener('load', () => {
+    // convert it back into JavaScript object
+    products = JSON.parse(xhr.response).map((productDetails) => {
+      if (productDetails.type === 'clothing') {
+        return new Clothing(productDetails);
+      } else if (productDetails.type === 'appliances') {
+        return new Appliances(productDetails);
+      }
+      return new Product(productDetails);
+    });
+
+    console.log(products);
+
+    func();
+  });
+
+  xhr.open('GET', 'https://supersimplebackend.dev/products');
+  xhr.send();
+}
+
+loadProducts();
