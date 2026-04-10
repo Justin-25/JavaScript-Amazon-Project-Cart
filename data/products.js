@@ -881,7 +881,7 @@ export function loadProducts(func) {
       return new Product(productDetails);
     });
 
-    console.log(products);
+    console.log('load products');
 
     func();
   });

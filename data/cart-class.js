@@ -131,6 +131,18 @@ class Cart {
     matchingItem.deliveryOptionId = deliveryOptionId;
     this.saveToCart();
   }
+
+  loadCart(func) {
+    const xhr = new XMLHttpRequest();
+  
+    xhr.addEventListener('load', () => {
+      console.log(xhr.response)
+      func();
+    });
+  
+    xhr.open('GET', 'https://supersimplebackend.dev/cart');
+    xhr.send();
+  }
 };
 
 export const cart = new Cart('cart');
