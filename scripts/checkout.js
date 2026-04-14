@@ -8,24 +8,44 @@ import { cart } from "../data/cart-class.js";
 // import '../data/backend-practice.js'
 
 
+async function loadPage() {
+  // it will wait for this line to finish and get the response from the backend before going to the next line
+  await loadProductsFetch();
+
+  // we can simply save whatever is resolve inside a variable
+  const value = await new Promise((resolve) => {
+    cart.loadCart(() => {
+      console.log('display products');
+      resolve('value3'); // this value will be saved in the next step
+    });
+  });
+
+  console.log('next step')
+  renderCheckoutHeader();
+  renderOrderSummary();
+  renderPaymentSummary();
+
+};
+
+loadPage();
+
+/*
 // - lets us run multiple promises at the same time
 // - and wait for all of them to finish
 Promise.all([
 
   loadProductsFetch(),
 
-  /*
-    new Promise((resolve) => {
-      console.log('start promise');
-      // Asynchronous function
-      loadProducts(() => {
-        console.log('finished loading products')
-        // first feature is we can give resoleve() a value
-        resolve('value1');
-      });
-    }),
-  */
- 
+    // new Promise((resolve) => {
+    //   console.log('start promise');
+    //   // Asynchronous function
+    //   loadProducts(() => {
+    //     console.log('finished loading products')
+    //     // first feature is we can give resoleve() a value
+    //     resolve('value1');
+    //   });
+    // }),
+
   new Promise((resolve) => {
     cart.loadCart(() => {
       console.log('finished loading cart')
@@ -40,6 +60,7 @@ Promise.all([
   renderOrderSummary();
   renderPaymentSummary();
 });
+*/
 
 /*
 new Promise((resolve) => {
