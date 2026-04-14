@@ -21,7 +21,7 @@ async function loadPage() {
       // or we can use reject if we're creating the error asynchronously or in the future
       cart.loadCart(() => {
         console.log('display products');
-        // reject('error3'); // lets us create an error in the future
+        //  reject('error3'); // lets us create an error in the future
         resolve('value3'); // this value will be saved in the next step
       });
     });
