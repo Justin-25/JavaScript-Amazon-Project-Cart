@@ -9,22 +9,27 @@ import { cart } from "../data/cart-class.js";
 
 
 async function loadPage() {
-
   // we're going to put the code that could cause an error into try
   try {
     // it will wait for this line to finish and get the response from the backend before going to the next line
-    await loadProductsFetch();
+    // await loadProductsFetch();
+    // cart.loadCartFetch();
+
+    await Promise.all([
+      loadProductsFetch(),
+      cart.loadCartFetch()
+    ]);
 
     // we can simply save whatever is resolve inside a variable
-    const value = await new Promise((resolve, reject) => {
-      // throw 'error2';  // we can use throw if we're creating the error synchronously or right away, 
-      // or we can use reject if we're creating the error asynchronously or in the future
-      cart.loadCart(() => {
-        console.log('display products');
-        //  reject('error3'); // lets us create an error in the future
-        resolve('value3'); // this value will be saved in the next step
-      });
-    });
+    // const value = await new Promise((resolve, reject) => {
+    //   // throw 'error2';  // we can use throw if we're creating the error synchronously or right away, 
+    //   // or we can use reject if we're creating the error asynchronously or in the future
+    //   cart.loadCartFetch(() => {
+    //     console.log('display products');
+    //     //  reject('error3'); // lets us create an error in the future
+    //     resolve('value3'); // this value will be saved in the next step
+    //   });
+    // });
 
   } catch (error) {
     error = console.log('Unexpected error; Please try again later...');

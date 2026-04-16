@@ -143,6 +143,13 @@ class Cart {
     xhr.open('GET', 'https://supersimplebackend.dev/cart');
     xhr.send();
   }
+
+  async loadCartFetch() {
+    const response = await fetch('https://supersimplebackend.dev/cart');
+    const cart = await response.text();
+    return cart;
+    console.log(cart);
+  }
 };
 
 export const cart = new Cart('cart');

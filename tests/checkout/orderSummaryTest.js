@@ -14,8 +14,8 @@ describe('Test suite: renderorderSummary', () => {
   let productPrice1;
   let productPrice2;
 
-  beforeAll((done) => {
-    loadProductsFetch().then(() => {
+  beforeAll(async () => {
+    await loadProductsFetch().then(() => {
       product1 = getProduct(productId1);
       product2 = getProduct(productId2);
 
@@ -25,7 +25,7 @@ describe('Test suite: renderorderSummary', () => {
       productPrice1 = formatCurrency(product1.priceCents);
       productPrice2 = formatCurrency(product2.priceCents)
       // done() lets us control when to go to the next step
-      done();
+      // done();
     });
   });
 

@@ -1,8 +1,9 @@
 import { cart } from '../data/cart-class.js';
 import { products, loadProducts } from '../data/products.js';
 import { updateCartQty } from './utils/updateQty.js';
-import '../data/backend-practice.js'
+// import '../data/backend-practice.js'
 
+cart.loadCartFetch();
 
 // In JavaScript functions are values and we can use a function as a parameter.
 // Callback - renderProductsGrid
