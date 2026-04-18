@@ -1,6 +1,8 @@
+import { cart } from "../data/cart-class.js";
 import { orders } from "../data/orders.js";
 import { getProduct, loadProductsFetch } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
+import { updateCartQty } from "./utils/updateQty.js";
 
 function formatOrderDate(orderTime) {
   const dateObject = new Date(orderTime);
@@ -48,13 +50,13 @@ function renderOrdersGrid() {
           <div class="product-quantity">
             Quantity: ${orderedItem.quantity}
           </div>
-          <button class="buy-again-button button-primary">
+          <button class="buy-again-button button-primary js-buy-again" data-product-id="${product.id}">
             <img class="buy-again-icon" src="images/icons/buy-again.png">
-            <span class="buy-again-message">Buy it again</span>
+            <span class="buy-again-message ">Buy it again</span>
           </button>
         </div>
 
-        <div class="product-actions">
+        <div class="product-actions js-track-id">
           <a href="tracking.html">
             <button class="track-package-button button-secondary">
               Track package
@@ -90,4 +92,24 @@ function renderOrdersGrid() {
   });
 
   document.querySelector('.js-order-container').innerHTML = orderHtml;
+
+  updateCartQty();
+
+  document.querySelectorAll('.js-buy-again')
+    .forEach((button) => {
+      button.addEventListener('click', () => {
+        const productId = button.dataset.productId;
+
+        cart.addToCart(productId);
+        updateCartQty();
+      })
+    });
+
+  // document.querySelectorAll('.js-track-id')
+  //   .forEach((button) => {
+  //     button.addEventListener('click', () => {
+  //       const trackId = button.dataset.trackId;
+        
+  //     })
+  //   })
 }
