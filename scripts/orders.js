@@ -88,6 +88,7 @@ function renderOrdersGrid() {
       <div class="order-details-grid js-order-details-grid">
         ${orderProductsHtml}
       </div>
+      <br>
     `
   });
 
