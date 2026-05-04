@@ -1,5 +1,5 @@
-import { orders } from "../data/orders";
-import { getProduct, loadProductsFetch } from "../data/products";
+import { orders } from "../data/orders.js";
+import { getProduct, loadProductsFetch } from "../data/products.js";
 
 renderTrackingItem();
 
@@ -12,8 +12,17 @@ async function renderTrackingItem() {
 function renderTrackingGrid() {
   let trackingHTML = '';
 
-  orders.forEach((orderedId) => {
-    const productItem = getProduct(orderedId.productId);
+  const url = new URL(window.location.href);
+  const orderId = url.searchParams.get('orderId');
+  const productId = url.searchParams.get('productId');
+  const order = orders.find(order => order.id === orderId);
+  const orderedItem = order?.products.find(item => item.productId === productId);
+
+    const productItem = getProduct(orderedItem.productId);
+
+    if (!orderedItem) {
+      return;
+    }
 
     if (!productItem) {
       return;
@@ -33,7 +42,7 @@ function renderTrackingGrid() {
         </div>
 
         <div class="product-info">
-          ${orderedId.quantity}
+          ${orderedItem.quantity}
         </div>
 
         <img class="product-image" src="${productItem.image}">
@@ -54,7 +63,6 @@ function renderTrackingGrid() {
           <div class="progress-bar"></div>
         </div>
     `
-  });
 
   document.querySelector('.js-order-tracking-container').innerHTML = trackingHTML;
 };
