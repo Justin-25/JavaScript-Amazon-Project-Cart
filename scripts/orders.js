@@ -4,7 +4,7 @@ import { getProduct, loadProductsFetch } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 import { updateCartQty } from "./utils/updateQty.js";
 
-function formatOrderDate(orderTime) {
+export function formatOrderDate(orderTime) {
   const dateObject = new Date(orderTime);
   const formattedDate = dateObject.toLocaleDateString('en-US', {
     month: 'long',
@@ -27,6 +27,10 @@ function renderOrdersGrid() {
   let orderHtml = '';
 
   orders.forEach((order) => {
+    if(!order.products) {
+      return;
+    } 
+
     let orderProductsHtml = '';
 
     order.products.forEach((orderedItem) => {
